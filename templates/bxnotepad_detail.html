@@ -1,0 +1,25 @@
+<table class='outer'>
+	<tr>
+		<th><{$item.title}></th>
+	</tr>
+	<tr>
+		<td class="odd">
+			<b><{$smarty.const._MD_BXNOTEPAD_LANG_UPDATE_DATE}>:</b>
+			<{$item.update_date|date_format:"%Y-%m-%d %H:%M"}>
+		</td>
+	</tr>
+	<tr>
+		<td class="even">
+			<b><{$smarty.const._MD_BXNOTEPAD_LANG_FOLDER}>:</b>			<{if $i.fid}>
+				<{$i.folder.name}>
+			<{else}>
+				<{$smarty.const._MD_BXNOTEPAD_LANG_DEF_FOLDER}>
+			<{/if}>
+		</td>
+	</tr>
+	<tr>
+		<td class="odd">
+			<{$item.contents}>
+		</td>
+	</tr>
+</table>

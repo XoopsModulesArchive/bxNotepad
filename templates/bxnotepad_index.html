@@ -1,0 +1,55 @@
+<div align="center"><{$navi}></div>
+
+<form method="get">
+	<select name="fid">
+		<{if $request.fid==0}>
+			<option value="<{$i.fid}>" selected><{$smarty.const._MD_BXNOTEPAD_LANG_DEF_FOLDER}></option>
+		<{else}>
+			<option value="<{$i.fid}>"><{$smarty.const._MD_BXNOTEPAD_LANG_DEF_FOLDER}></option>
+		<{/if}>
+		<{foreach name=parent item=i from=$folders}>
+			<{if $request.fid==$i.fid}>
+				<option value="<{$i.fid}>" selected><{$i.name}></option>
+			<{else}>
+				<option value="<{$i.fid}>"><{$i.name}></option>
+			<{/if}>
+		<{/foreach}>
+	</select>
+	<input type="submit">
+</form>
+<{if $request.fid}>
+	[<a href="folder.php?fid=<{$request.fid}>">
+		<{$smarty.const._MD_BXNOTEPAD_EDIT_THIS_FOLDER}>
+	</a>]
+	[<a href="folder_delete.php?fid=<{$request.fid}>">
+		<{$smarty.const._MD_BXNOTEPAD_DELETE_THIS_FOLDER}>
+	</a>]
+<{/if}>
+
+<table class='outer'>
+	<tr>
+		<th><{$smarty.const._MD_BXNOTEPAD_LANG_TITLE}></th>
+		<th><{$smarty.const._MD_BXNOTEPAD_LANG_FOLDER}></th>
+		<th><{$smarty.const._MD_BXNOTEPAD_LANG_UPDATE_DATE}></th>
+		<th>&nbsp;</th>
+	</tr>
+	<{foreach name=parent item=i from=$notes}>
+		<tr class="<{cycle values="odd,even"}>">
+			<td><a href="detail.php?id=<{$i.id}>"><{$i.title}></a></td>
+			<td>
+				<{if $i.fid}>
+					<{$i.folder.name}>
+				<{else}>
+					<{$smarty.const._MD_BXNOTEPAD_LANG_DEF_FOLDER}>
+				<{/if}>
+			</td>
+			<td><{$i.update_date|date_format:"%Y-%m-%d %H:%M"}></td>
+			<td>
+				<a href="submit.php?id=<{$i.id}>"><{$smarty.const._MD_BXNOTEPAD_LANG_EDIT}></a>
+				<a href="delete.php?id=<{$i.id}>"><{$smarty.const._MD_BXNOTEPAD_LANG_DELETE}></a>
+			</td>
+		</tr>
+	<{/foreach}>
+</table>
+
+<div align="center"><{$navi}></div>
